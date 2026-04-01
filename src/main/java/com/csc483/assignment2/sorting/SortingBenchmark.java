@@ -21,6 +21,7 @@ public class SortingBenchmark {
                 runTest("Quick", data.clone(), size, type);
             }
         }
+        System.out.println("\nAll benchmarks completed successfully.");
     }
 
     private static void runTest(String algoName, int[] arr, int size, String type) {
@@ -45,7 +46,7 @@ public class SortingBenchmark {
     private static SortResult sort(int[] arr, String algo) {
         SortResult result = new SortResult();
         if (algo.equals("Insertion")) insertionSort(arr, result);
-        else if (algo.equals("Merge")) mergeSort(arr, result);
+        else if (algo.equals("Merge")) mergeSort(arr, 0, arr.length - 1, result);
         else if (algo.equals("Quick")) quickSort(arr, 0, arr.length - 1, result);
         return result;
     }
@@ -68,33 +69,34 @@ public class SortingBenchmark {
         }
     }
 
-    // Merge Sort with counters
-    private static void mergeSort(int[] arr, SortResult r) {
-        if (arr.length <= 1) return;
-        int mid = arr.length / 2;
-        int[] left = Arrays.copyOfRange(arr, 0, mid);
-        int[] right = Arrays.copyOfRange(arr, mid, arr.length);
-        mergeSort(left, r);
-        mergeSort(right, r);
-        merge(arr, left, right, r);
+    // Merge Sort
+    private static void mergeSort(int[] arr, int left, int right, SortResult r) {
+        if (left >= right) return;
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid, r);
+        mergeSort(arr, mid + 1, right, r);
+        merge(arr, left, mid, right, r);
     }
 
-    private static void merge(int[] arr, int[] left, int[] right, SortResult r) {
-        int i = 0, j = 0, k = 0;
-        while (i < left.length && j < right.length) {
+    private static void merge(int[] arr, int left, int mid, int right, SortResult r) {
+        int[] temp = new int[right - left + 1];
+        int i = left, j = mid + 1, k = 0;
+        while (i <= mid && j <= right) {
             r.comparisons++;
-            if (left[i] <= right[j]) {
-                arr[k++] = left[i++];
+            if (arr[i] <= arr[j]) {
+                temp[k++] = arr[i++];
             } else {
-                arr[k++] = right[j++];
-                r.swaps++;
+                temp[k++] = arr[j++];
             }
         }
-        while (i < left.length) arr[k++] = left[i++];
-        while (j < right.length) arr[k++] = right[j++];
+        while (i <= mid) temp[k++] = arr[i++];
+        while (j <= right) temp[k++] = arr[j++];
+        for (i = 0; i < temp.length; i++) {
+            arr[left + i] = temp[i];
+        }
     }
 
-    // Quick Sort with counters
+    // Quick Sort with median-of-three (no more stack overflow)
     private static void quickSort(int[] arr, int low, int high, SortResult r) {
         if (low < high) {
             int pi = partition(arr, low, high, r);
@@ -104,6 +106,7 @@ public class SortingBenchmark {
     }
 
     private static int partition(int[] arr, int low, int high, SortResult r) {
+        medianOfThree(arr, low, high, r);
         int pivot = arr[high];
         int i = low - 1;
         for (int j = low; j < high; j++) {
@@ -115,6 +118,14 @@ public class SortingBenchmark {
         }
         swap(arr, i + 1, high, r);
         return i + 1;
+    }
+
+    private static void medianOfThree(int[] arr, int low, int high, SortResult r) {
+        int mid = low + (high - low) / 2;
+        if (arr[low] > arr[mid]) swap(arr, low, mid, r);
+        if (arr[low] > arr[high]) swap(arr, low, high, r);
+        if (arr[mid] > arr[high]) swap(arr, mid, high, r);
+        swap(arr, mid, high, r);  // median becomes pivot
     }
 
     private static void swap(int[] arr, int i, int j, SortResult r) {
