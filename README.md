@@ -52,8 +52,9 @@ mvn exec:java -Dexec.mainClass="com.csc483.assignment2.sorting.SortingBenchmark"
 mvn test
 ```
 
-📁 Project Structure
+## 📁 Project Structure
 
+```bash
 .
 ├── pom.xml
 ├── README.md
@@ -72,15 +73,16 @@ mvn test
 │   │   └── assignment2/sorting/  # Question 2
 │   └── test/java/com/csc483/assignment/
 └── target/                       # ignored by .gitignore
+```
 
-📸 Screenshots
+## 📸 Screenshots
 All program outputs and benchmark results are available in the screenshots/ folder:
 
-Question 1 – Performance comparison table and JUnit results
+- Question 1: Performance comparison table and JUnit results
 
-Question 2 – Full sorting benchmark tables (random, nearly-sorted, etc.)
+- Question 2: Full sorting benchmark tables (random, nearly-sorted, etc.)
 
-✅ Features Implemented
+## ✅ Features Implemented
 Fully commented, production-style Java code
 
 JUnit 5 tests with edge cases
@@ -93,7 +95,7 @@ Complete sorting benchmarks with comparison/swaps counters
 
 Algorithm decision tree (Part D)
 
-Repository is public and ready for submission.
+
 
 Made with care for CSC 483.1 @ University of Port Harcourt
 Last updated: April 1, 2026.
