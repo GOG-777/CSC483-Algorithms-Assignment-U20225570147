@@ -16,3 +16,8 @@ Question 1 Output Screenshots:
 
 - screenshots/performance-table.png
 - screenshots/junit-tests.png
+
+## Question 2 - Sorting Benchmark
+Run with:
+mvn exec:java -Dexec.mainClass="com.csc483.assignment2.sorting.SortingBenchmark"
+Screenshots are in the screenshots/ folder.
