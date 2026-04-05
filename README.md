@@ -100,6 +100,7 @@ Algorithm decision tree (Part D)
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 Feel free to use it as a reference for learning, but please do not submit it (or direct copies) as your own work.
+
 Thanks for your understanding.
 
 ## ==========================================================
