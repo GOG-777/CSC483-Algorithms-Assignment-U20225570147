@@ -95,8 +95,14 @@ Complete sorting benchmarks with comparison/swaps counters
 
 Algorithm decision tree (Part D)
 
+## 📜 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+Feel free to use it as a reference for learning, but please do not submit it (or direct copies) as your own work.
+
 ## ==========================================================
 
 Made with care for CSC 483.1 @ University of Port Harcourt
 
-Last updated: April 1, 2026.
+Last updated: April 5, 2026.
